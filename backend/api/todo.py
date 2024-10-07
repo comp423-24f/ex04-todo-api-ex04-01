@@ -65,7 +65,7 @@ def update_todo(
     todo_service: TodoService = Depends(),
     subject: User = Depends(registered_user),
 ) -> TodoItem:
-    """API to create new todo item."""
+    """API to update todo item."""
     return todo_service.toggle_checkmark(subject, item)
 
 
@@ -79,4 +79,11 @@ def update_todo(
 # This API should not respond with any data to the frontend once called.
 #
 # Your solution below:
-...
+@api.delete("", tags=["Todo"])
+def delete_todo(
+    id: int,
+    todo_service: TodoService = Depends(),
+    subject: User = Depends(registered_user),
+) -> None:
+    """API to delete todo item."""
+    todo_service.delete(subject, id)
