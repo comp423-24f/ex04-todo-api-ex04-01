@@ -59,7 +59,15 @@ def create_todos(
 # This API should respond with the edited `TodoItem` to the frontend once called.
 #
 # Your solution below:
-...
+@api.put("", response_model=TodoItem, tags=["Todo"])
+def update_todo(
+    item: TodoItem,
+    todo_service: TodoService = Depends(),
+    subject: User = Depends(registered_user),
+) -> TodoItem:
+    """API to create new todo item."""
+    return todo_service.toggle_checkmark(subject, item)
+
 
 # TODO: Create a DELETE API that enables users to delete a todo list item.
 # The API route should include an ID, and there is no expected request body.
