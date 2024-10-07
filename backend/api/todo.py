@@ -38,7 +38,14 @@ def get_todos(
 # This API should respond with the created `TodoItem` to the frontend once called.
 #
 # Your solution below:
-...
+@api.post("", response_model=TodoItem, tags=["Todo"])
+def create_todos(
+    item: TodoItem,
+    todo_service: TodoService = Depends(),
+    subject: User = Depends(registered_user),
+) -> TodoItem:
+    """API to create new todo item."""
+    return todo_service.create(subject, item)
 
 
 # TODO: Create a PUT API that enables users to toggle todo list items.
