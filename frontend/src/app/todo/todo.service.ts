@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodoService {
   /** Encapsulates a reactive list of to-do items. */
-  todoList: WritableSignal<ToDoListItem[]> = signal([]);
+  todoList: WritableSignal<ToDoListItem[]> = signal<ToDoListItem[]>([]);
 
   constructor(protected http: HttpClient) {}
 
@@ -40,6 +40,11 @@ export class TodoService {
       title: title,
       completed: false
     };
+
+    this.http.post<ToDoListItem>(`/api/todo`, newItem).subscribe({
+      next: (item) => this.todoList.update((list) => [...list, item]),
+      error: (err) => console.log(err)
+    });
 
     // TODO: Using the `http` HttpClient, call the appropriate
     // API to add a todo item for the user.
