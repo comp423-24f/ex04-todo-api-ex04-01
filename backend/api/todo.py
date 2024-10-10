@@ -65,7 +65,7 @@ def update_todo(
     todo_service: TodoService = Depends(),
     subject: User = Depends(registered_user),
 ) -> TodoItem:
-    """API to update todo item."""
+    """API to toggle completed property on todo item."""
     return todo_service.toggle_checkmark(subject, item)
 
 
