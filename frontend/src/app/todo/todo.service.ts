@@ -10,6 +10,7 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 
 import { ToDoListItem } from './todo.model';
 import { HttpClient } from '@angular/common/http';
+import { newsResolver } from '../news/news.resolver';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +78,21 @@ export class TodoService {
     //
     // Feel free to use the completed `getItems()` method as
     // a guide.
+    this.http.put<ToDoListItem>(`/api/todo`, item).subscribe({
+      next: (itemToToggle) =>
+        this.todoList.update((list) => {
+          const fullList = [...list];
+          for (let i = 0; i < fullList.length; i++) {
+            if (fullList[i].id === itemToToggle.id) {
+              fullList[i].completed = !fullList[i].completed;
+              break;
+            }
+          }
+          // console.log(fullList);
+          return fullList;
+        }),
+      error: (err) => console.log(err)
+    });
   }
 
   /**
