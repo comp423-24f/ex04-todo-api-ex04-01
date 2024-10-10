@@ -100,6 +100,13 @@ export class TodoService {
    * @param item:  Item to delete.
    */
   deleteItem(item: ToDoListItem) {
+    this.http.delete<ToDoListItem>(`/api/todo/${item.id}`).subscribe({
+      next: () =>
+        this.todoList.update((list) =>
+          list.filter((items) => items.id !== item.id)
+        ),
+      error: (err) => console.log(err)
+    });
     // TODO: Using the `http` HttpClient, call the appropriate
     // API to toggle the delete an item item for the user. Note that
     // the delete API accepts the item ID.

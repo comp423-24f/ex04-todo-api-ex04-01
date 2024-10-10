@@ -79,7 +79,7 @@ def update_todo(
 # This API should not respond with any data to the frontend once called.
 #
 # Your solution below:
-@api.delete("", tags=["Todo"])
+@api.delete("/{id}", tags=["Todo"])
 def delete_todo(
     id: int,
     todo_service: TodoService = Depends(),
