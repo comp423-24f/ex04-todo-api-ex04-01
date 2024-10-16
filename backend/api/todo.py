@@ -57,12 +57,11 @@ def delete_todo(
     todo_service.delete(subject, id)
 
 
-@api.put("/{id}", response_model=TodoItem, tags=["Todo"])
+@api.put("", response_model=TodoItem, tags=["Todo"])
 def update_todo(
-    id: int,
     item: TodoItem,
     todo_service: TodoService = Depends(),
     subject: User = Depends(registered_user),
 ) -> TodoItem:
     """API to update a todo item's title."""
-    return todo_service.update(subject, item, id)
+    return todo_service.update(subject, item)
