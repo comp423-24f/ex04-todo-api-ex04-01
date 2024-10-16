@@ -66,3 +66,15 @@ class TodoService:
             raise UserPermissionException(f"Cannot edit the todo items of others.")
         self._session.delete(entity)
         self._session.commit()
+    
+    def update(self, subject: User, item: TodoItem) -> TodoItem:
+        """Updates the todo list item."""
+        query = select(TodoEntity).where(TodoEntity.id == item.id)
+        entity = self._session.scalars(query).one_or_none()
+        if entity is None:
+            raise ResourceNotFoundException(f"No todo item found with id: {item.id}")
+        if entity.user_id != subject.id:
+            raise UserPermissionException(f"Cannot edit the todo items of others.")
+        entity.title = item.title
+        self._session.commit()
+        return entity.to_model()
