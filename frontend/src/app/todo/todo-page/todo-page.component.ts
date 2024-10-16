@@ -72,4 +72,14 @@ export class TodoPageComponent {
     // Call the appropriate service method to delete the item.
     this.todoService.deleteItem(item);
   }
+
+  updateItem(item: ToDoListItem) {
+    // Retrieve the text inputted into the form control.
+    const newItemTitle = this.newItemFormControl.value;
+    // Use the service to create a new to-do list item, if the title
+    // is not null and if it is not empty.
+    if (newItemTitle && newItemTitle.length > 0) {
+      this.todoService.updateItem(item, newItemTitle);
+    }
+  }
 }
