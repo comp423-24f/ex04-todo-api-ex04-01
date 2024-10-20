@@ -14,10 +14,23 @@
                     <mat-list-item role="listitem">
                         <div class="list-item-row">
                             <mat-checkbox [checked]="item.completed" (change)="checkmarkPressed(item)"/>
-                            {{ item.title }}
-                            <button mat-icon-button class="delete-button" (click)="deleteItem(item)">
-                                <mat-icon class=tertiary-icon>delete</mat-icon>
-                            </button>
+                            @if(item.id !== editingID) {
+                                {{ item.title }}
+                                <button mat-icon-button class="delete-button" (click)="deleteItem(item)">
+                                    <mat-icon class=tertiary-icon>delete</mat-icon>
+                                </button>
+                                <button mat-icon-button class="edit-button" (click)="startUpdate(item)">
+                                    <mat-icon class=tertiary-icon>create</mat-icon>
+                                </button>
+                            }
+                            @else {
+                                <button mat-icon-button class="save-button" (click)="updateItem(item)">
+                                    <mat-icon class="tertiary-icon">check</mat-icon>
+                                </button>
+                                <button mat-icon-button class="cancel-button" (click)="cancelUpdate()">
+                                    <mat-icon class="tertiary-icon">close</mat-icon>
+                                </button>
+                            }
                         </div>
                     </mat-list-item>
                     <mat-divider />
