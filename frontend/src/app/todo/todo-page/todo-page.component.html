@@ -27,12 +27,12 @@
                                 <input matInput 
                                         [formControl]="newTitleFormControl" 
                                         (keyup.enter)="updateItem(item)"
-                                        (keyup.escape)="cancelUpdate()"
+                                        (keyup.escape)="cancelUpdate(item)"
                                         class="inline-edit-input">
                                 <button mat-icon-button class="save-button" (click)="updateItem(item)">
                                     <mat-icon class="tertiary-icon">check</mat-icon>
                                 </button>
-                                <button mat-icon-button class="cancel-button" (click)="cancelUpdate()">
+                                <button mat-icon-button class="cancel-button" (click)="cancelUpdate(item)">
                                     <mat-icon class="tertiary-icon">close</mat-icon>
                                 </button>
                             }
