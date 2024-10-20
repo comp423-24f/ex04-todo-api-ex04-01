@@ -103,8 +103,7 @@ export class TodoPageComponent {
   }
 
   /**
-   * Updates an item from the todo list.
-   * @param item: Item to update.
+   * Cancels an update on an item from the todo list.
    */
   cancelUpdate() {
     this.editingID = null;
