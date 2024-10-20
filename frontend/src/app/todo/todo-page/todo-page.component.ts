@@ -27,6 +27,8 @@ export class TodoPageComponent {
 
   // Variable to track item id of item under update.
   editingID: number | null = null;
+  // Variable to track original item title of item under update.
+  originalTitle: string | null = null;
 
   /**
    * Encapsulates the form control for creating a new to-do list item.
@@ -85,7 +87,8 @@ export class TodoPageComponent {
   startUpdate(item: ToDoListItem) {
     // Set the editing item id to this item id.
     this.editingID = item.id;
-    this.newTitleFormControl.setValue(item.title);
+    this.originalTitle = item.title;
+    this.newTitleFormControl.setValue(this.originalTitle);
   }
 
   /**
@@ -100,15 +103,21 @@ export class TodoPageComponent {
     if (newItemTitle && this.editingID === item.id) {
       this.todoService.updateItem(item, newItemTitle);
       this.editingID = null;
+      this.originalTitle = null;
       this.newTitleFormControl.reset();
     }
   }
 
   /**
    * Cancels an update on an item from the todo list.
+   * @param item: Item to update.
    */
-  cancelUpdate() {
+  cancelUpdate(item: ToDoListItem) {
+    if (this.originalTitle !== null) {
+      item.title = this.originalTitle;
+    }
     this.editingID = null;
+    this.originalTitle = null;
     this.newTitleFormControl.reset();
   }
 }
