@@ -25,10 +25,10 @@
                             }
                             @else {
                                 <input matInput 
-                                       [(ngModel)]="item.title" 
-                                       (keyup.enter)="updateItem(item)"
-                                       (keyup.escape)="cancelUpdate()"
-                                       class="inline-edit-input">
+                                        [formControl]="newTitleFormControl" 
+                                        (keyup.enter)="updateItem(item)"
+                                        (keyup.escape)="cancelUpdate()"
+                                        class="inline-edit-input">
                                 <button mat-icon-button class="save-button" (click)="updateItem(item)">
                                     <mat-icon class="tertiary-icon">check</mat-icon>
                                 </button>
