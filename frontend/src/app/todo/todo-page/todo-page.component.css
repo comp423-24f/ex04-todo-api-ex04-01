@@ -39,7 +39,7 @@ mat-card-actions {
     height: 48px;
 }
 
-.delete-button {
+.delete-button, .save-button {
     margin-left: auto;
 }
 
