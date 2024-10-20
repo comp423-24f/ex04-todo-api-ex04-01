@@ -88,7 +88,7 @@ export class TodoPageComponent {
     // Set the editing item id to this item id.
     this.editingID = item.id;
     this.originalTitle = item.title;
-    this.newTitleFormControl.setValue(this.originalTitle);
+    this.newTitleFormControl.setValue(item.title);
   }
 
   /**
