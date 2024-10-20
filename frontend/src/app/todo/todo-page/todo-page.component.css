@@ -43,6 +43,13 @@ mat-card-actions {
     margin-left: auto;
 }
 
+.inline-edit-input {
+    border: none;
+    width: 100%;
+    font-size: 16.5px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 #empty-text {
     margin-top: 24px;
 }
