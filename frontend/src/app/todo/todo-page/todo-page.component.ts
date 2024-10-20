@@ -36,6 +36,7 @@ export class TodoPageComponent {
    * the TypeScript file.
    */
   newItemFormControl = new FormControl<string>('');
+  newTitleFormControl = new FormControl<string>('');
 
   /**
    * Constructor that runs when the component is created.
@@ -55,6 +56,7 @@ export class TodoPageComponent {
     // is not null and if it is not empty.
     if (newItemTitle && newItemTitle.length > 0) {
       this.todoService.addItem(newItemTitle);
+      this.newItemFormControl.reset();
     }
   }
 
@@ -83,7 +85,7 @@ export class TodoPageComponent {
   startUpdate(item: ToDoListItem) {
     // Set the editing item id to this item id.
     this.editingID = item.id;
-    this.newItemFormControl.setValue(item.title);
+    this.newTitleFormControl.setValue(item.title);
   }
 
   /**
@@ -92,13 +94,13 @@ export class TodoPageComponent {
    */
   updateItem(item: ToDoListItem) {
     // Retrieve the text inputted into the form control.
-    const newItemTitle = this.newItemFormControl.value;
+    const newItemTitle = this.newTitleFormControl.value;
     // Use the service to update a to-do list item, if the title
     // is not null and if it is not empty.
     if (newItemTitle && this.editingID === item.id) {
       this.todoService.updateItem(item, newItemTitle);
       this.editingID = null;
-      this.newItemFormControl.reset();
+      this.newTitleFormControl.reset();
     }
   }
 
@@ -107,6 +109,6 @@ export class TodoPageComponent {
    */
   cancelUpdate() {
     this.editingID = null;
-    this.newItemFormControl.reset();
+    this.newTitleFormControl.reset();
   }
 }
