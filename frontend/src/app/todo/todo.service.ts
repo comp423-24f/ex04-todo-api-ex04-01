@@ -76,12 +76,10 @@ export class TodoService {
   }
 
   /**
-   * Updates an item by check marking it.
+   * Updates an item's title.
    * @param item: Item to toggle the checkmark status for.
-   * @param title: New title for item.
    */
   updateItem(item: ToDoListItem) {
-    //const updatedItem: ToDoListItem = { ...item, title: title };
     this.http
       .put<ToDoListItem>(`api/todo/${item.id}`, item)
       .subscribe((item) =>
