@@ -80,14 +80,14 @@ export class TodoService {
    * @param item: Item to toggle the checkmark status for.
    * @param title: New title for item.
    */
-  updateItem(item: ToDoListItem, title: string) {
-    const updatedItem: ToDoListItem = { ...item, title: title };
+  updateItem(item: ToDoListItem) {
+    //const updatedItem: ToDoListItem = { ...item, title: title };
     this.http
-      .put<ToDoListItem>(`api/todo/${item.id}`, updatedItem)
-      .subscribe((updatedItem) =>
+      .put<ToDoListItem>(`api/todo/${item.id}`, item)
+      .subscribe((item) =>
         this.todoList.update((todos) => [
-          ...todos.filter((todo) => todo.id !== updatedItem.id),
-          updatedItem
+          ...todos.filter((todo) => todo.id !== item.id),
+          item
         ])
       );
   }

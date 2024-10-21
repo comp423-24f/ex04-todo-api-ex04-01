@@ -28,7 +28,7 @@ export class TodoPageComponent {
   // Variable to track item id of item under update.
   editingID: number | null = null;
   // Variable to track original item title of item under update.
-  originalTitle: string | null = null;
+  //originalTitle: string | null = null;
 
   /**
    * Encapsulates the form control for creating a new to-do list item.
@@ -87,9 +87,27 @@ export class TodoPageComponent {
   startUpdate(item: ToDoListItem) {
     // Set the editing item id to this item id.
     this.editingID = item.id;
-    this.originalTitle = item.title;
+    //this.originalTitle = item.title;
     this.newTitleFormControl.setValue(item.title);
+    this.todoService.updateItem(item);
   }
+
+  // /**
+  //  * Updates an item from the todo list.
+  //  * @param item: Item to update.
+  //  */
+  // updateItem(item: ToDoListItem) {
+  //   // Retrieve the text inputted into the form control.
+  //   const newItemTitle = this.newTitleFormControl.value;
+  //   // Use the service to update a to-do list item, if the title
+  //   // is not null and if it is not empty.
+  //   if (newItemTitle && this.editingID === item.id) {
+  //     this.todoService.updateItem(item, newItemTitle);
+  //     this.editingID = null;
+  //     this.originalTitle = null;
+  //     this.newTitleFormControl.reset();
+  //   }
+  // }
 
   /**
    * Updates an item from the todo list.
@@ -100,24 +118,36 @@ export class TodoPageComponent {
     const newItemTitle = this.newTitleFormControl.value;
     // Use the service to update a to-do list item, if the title
     // is not null and if it is not empty.
-    if (newItemTitle && this.editingID === item.id) {
-      this.todoService.updateItem(item, newItemTitle);
-      this.editingID = null;
-      this.originalTitle = null;
-      this.newTitleFormControl.reset();
+    if (newItemTitle && this.editingID === item.id && newItemTitle.length > 0) {
+      //this.todoService.updateItem(item, newItemTitle);
+      item.title = newItemTitle;
+      //this.editingID = null;
+      //this.originalTitle = null;
+      //this.newTitleFormControl.reset();
     }
+    this.editingID = null;
+    //this.originalTitle = null;
   }
+
+  // /**
+  //  * Cancels an update on an item from the todo list.
+  //  * @param item: Item to update.
+  //  */
+  // cancelUpdate(item: ToDoListItem) {
+  //   if (this.originalTitle !== null) {
+  //     item.title = this.originalTitle;
+  //   }
+  //   this.editingID = null;
+  //   this.originalTitle = null;
+  //   this.newTitleFormControl.reset();
+  // }
 
   /**
    * Cancels an update on an item from the todo list.
-   * @param item: Item to update.
    */
-  cancelUpdate(item: ToDoListItem) {
-    if (this.originalTitle !== null) {
-      item.title = this.originalTitle;
-    }
+  cancelUpdate() {
     this.editingID = null;
-    this.originalTitle = null;
-    this.newTitleFormControl.reset();
+    //this.originalTitle = null;
+    //this.newTitleFormControl.reset();
   }
 }
