@@ -87,28 +87,8 @@ export class TodoPageComponent {
   startUpdate(item: ToDoListItem) {
     // Set the editing item id to this item id.
     this.editingID = item.id;
-    //this.originalTitle = item.title;
     this.newTitleFormControl.setValue(item.title);
-    this.todoService.updateItem(item);
-    console.log(item.title);
   }
-
-  // /**
-  //  * Updates an item from the todo list.
-  //  * @param item: Item to update.
-  //  */
-  // updateItem(item: ToDoListItem) {
-  //   // Retrieve the text inputted into the form control.
-  //   const newItemTitle = this.newTitleFormControl.value;
-  //   // Use the service to update a to-do list item, if the title
-  //   // is not null and if it is not empty.
-  //   if (newItemTitle && this.editingID === item.id) {
-  //     this.todoService.updateItem(item, newItemTitle);
-  //     this.editingID = null;
-  //     this.originalTitle = null;
-  //     this.newTitleFormControl.reset();
-  //   }
-  // }
 
   /**
    * Updates an item from the todo list.
@@ -120,36 +100,17 @@ export class TodoPageComponent {
     // Use the service to update a to-do list item, if the title
     // is not null and if it is not empty.
     if (newItemTitle && this.editingID === item.id && newItemTitle.length > 0) {
-      // this.todoService.updateItem(item);
       item.title = newItemTitle;
-      // this.editingID = null;
-      // this.originalTitle = null;
       this.newTitleFormControl.reset();
-      console.log(item.title);
     }
+    this.todoService.updateItem(item);
     this.editingID = null;
-    // this.originalTitle = null;
   }
-
-  // /**
-  //  * Cancels an update on an item from the todo list.
-  //  * @param item: Item to update.
-  //  */
-  // cancelUpdate(item: ToDoListItem) {
-  //   if (this.originalTitle !== null) {
-  //     item.title = this.originalTitle;
-  //   }
-  //   this.editingID = null;
-  //   this.originalTitle = null;
-  //   this.newTitleFormControl.reset();
-  // }
 
   /**
    * Cancels an update on an item from the todo list.
    */
   cancelUpdate() {
     this.editingID = null;
-    // this.originalTitle = null;
-    // this.newTitleFormControl.reset();
   }
 }
