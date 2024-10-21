@@ -53,6 +53,7 @@
                 matInput
                 placeholder=""
                 [formControl]="newItemFormControl"
+                (keyup.enter)="addNewItem()"
                 required />  
             </mat-form-field>
             <button mat-flat-button class="primary-button" (click)="addNewItem()" [disabled]="newItemFormControl.value?.length == 0">

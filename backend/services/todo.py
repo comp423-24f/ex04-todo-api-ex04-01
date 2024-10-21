@@ -67,7 +67,7 @@ class TodoService:
         self._session.delete(entity)
         self._session.commit()
 
-    def update(self, subject: User, item: TodoItem) -> TodoItem:
+    def updateTitle(self, subject: User, item: TodoItem) -> TodoItem:
         """Updates the todo list item."""
         query = select(TodoEntity).where(TodoEntity.id == item.id)
         entity = self._session.scalars(query).one_or_none()
